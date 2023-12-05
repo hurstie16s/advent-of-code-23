@@ -18,7 +18,9 @@ def main():
             inputData[i] = inputData[i].replace(string, number)
 
     inputData = list(map(removeLetters, inputData))
+    #print(inputData)
     inputData = list(map(lambda n: int(n[0]+n[len(n)-1]), inputData))
+    print(inputData)
     
     print("Result: " + str(sum(inputData)))
 
