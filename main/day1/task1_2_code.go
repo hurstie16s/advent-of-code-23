@@ -1,5 +1,6 @@
 package day1
 
+// System Imports
 import (
 	"bufio"
 	"fmt"
@@ -27,6 +28,12 @@ func Call_1_2() {
 
 func getFileContents(path string) []string {
 	readFile, err := os.Open(path)
+	defer func(readFile *os.File) {
+		err := readFile.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}(readFile)
 
 	if err != nil {
 		fmt.Println(err)

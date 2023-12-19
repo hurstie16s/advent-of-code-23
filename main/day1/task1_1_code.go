@@ -20,6 +20,12 @@ func Call_1_1() {
 
 func getFileContentsProcessed(path string) []int {
 	readFile, err := os.Open(path)
+	defer func(readFile *os.File) {
+		err := readFile.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}(readFile)
 
 	if err != nil {
 		fmt.Println(err)
