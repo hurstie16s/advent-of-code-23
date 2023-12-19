@@ -1,4 +1,4 @@
-package main
+package day1
 
 // System Imports
 import (
@@ -10,9 +10,16 @@ import (
 )
 
 // Main function
-func main() {
+
+func Call_1_1() {
 	filePath := "task1_1.txt"
-	readFile, err := os.Open(filePath)
+
+	finalNum := sum(getFileContentsProcessed(filePath))
+	fmt.Printf("Final sum = %d", finalNum)
+}
+
+func getFileContentsProcessed(path string) []int {
+	readFile, err := os.Open(path)
 
 	if err != nil {
 		fmt.Println(err)
@@ -31,8 +38,7 @@ func main() {
 		input = append(input, num)
 	}
 
-	finalNum := sum(input)
-	fmt.Printf("Final sum = %d", finalNum)
+	return input
 }
 
 func strip(s string) string {
