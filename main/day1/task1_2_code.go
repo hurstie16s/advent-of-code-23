@@ -14,8 +14,8 @@ func Call_1_2() {
 	numbersAsStrings := []string{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}
 	numbersAsValues := []string{"1", "2", "3", "4", "5", "6", "7", "8", "9"}
 
-	//filePath := "main/day1/task1_1.txt"
-	filePath := "main/day1/task1_2_eg.txt"
+	filePath := "main/day1/task1_1.txt"
+	//filePath := "main/day1/task1_2_eg.txt"
 
 	fileContents := getFileContents(filePath)
 	firstNums := parseForFirst(numbersAsStrings, numbersAsValues, fileContents)
@@ -101,7 +101,7 @@ func parseForLast(
 		for j := 0; j < len(numsAsStrings); j++ {
 			numString := numsAsStrings[j]
 			if strings.Contains(line, numString) {
-				index := strings.Index(line, numString)
+				index := strings.LastIndex(line, numString)
 				if index > lastNumIndex {
 					lastNumIndex = index
 					lastNum = numsAsValues[j]
@@ -112,7 +112,7 @@ func parseForLast(
 		for j := 0; j < len(numsAsStrings); j++ {
 			numVal := numsAsValues[j]
 			if strings.Contains(line, numVal) {
-				index := strings.Index(line, numVal)
+				index := strings.LastIndex(line, numVal)
 				if lastNumIndex == -1 || index > lastNumIndex {
 					lastNumIndex = index
 					lastNum = numsAsValues[j]
