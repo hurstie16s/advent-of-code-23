@@ -2,6 +2,7 @@ package day1
 
 // System Imports
 import (
+	shared "advent-of-code-23/main/shared_code"
 	"bufio"
 	"fmt"
 	"os"
@@ -14,7 +15,7 @@ import (
 func Call_1_1() {
 	filePath := "task1_1.txt"
 
-	finalNum := sum(getFileContentsProcessed(filePath))
+	finalNum := shared.Sum(getFileContentsProcessed(filePath))
 	fmt.Printf("Final sum = %d", finalNum)
 }
 
@@ -56,12 +57,4 @@ func strip(s string) string {
 		}
 	}
 	return result.String()
-}
-
-func sum(nums []int) int {
-	var sum int
-	for _, num := range nums {
-		sum += num
-	}
-	return sum
 }

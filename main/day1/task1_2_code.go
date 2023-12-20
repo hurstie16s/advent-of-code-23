@@ -2,6 +2,7 @@ package day1
 
 // System Imports
 import (
+	shared "advent-of-code-23/main/shared_code"
 	"bufio"
 	"fmt"
 	"os"
@@ -22,7 +23,7 @@ func Call_1_2() {
 	firstNums := parseForFirst(numbersAsStrings, numbersAsValues, fileContents)
 	lastNums := parseForLast(numbersAsStrings, numbersAsValues, fileContents)
 	nums := zipNums(firstNums, lastNums)
-	result = sum(nums)
+	result = shared.Sum(nums)
 	fmt.Printf("Result: %d", result)
 }
 
