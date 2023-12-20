@@ -28,19 +28,29 @@ func Call_2_1() {
 
 }
 
-func getColourCount(colour string, sets []string) int {
+func getColourCount(sets []string) (int, int, int) {
 
-	var count int
+	var blueCount int
+	var redCount int
+	var greenCount int
 
 	for _, set := range sets {
-		if strings.Contains(set, colour) {
-			index := strings.Index(set, colour) - 2 // TODO: Fix this so it handles 2 digit numbers
-			val, _ := strconv.Atoi(strings.TrimSpace(set[index : index+1]))
-			count = int(math.Max(float64(count), float64(val)))
+		splitSets := strings.Split(set, ", ")
+		for _, colour := range splitSets {
+			colourSplit := strings.Split(colour, " ")
+			val, _ := strconv.Atoi(colourSplit[0])
+			switch colourSplit[1] {
+			case "blue":
+				blueCount = int(math.Max(float64(blueCount), float64(val)))
+			case "red":
+				redCount = int(math.Max(float64(redCount), float64(val)))
+			case "green":
+				greenCount = int(math.Max(float64(greenCount), float64(val)))
+			}
 		}
 	}
 
-	return count
+	return blueCount, redCount, greenCount
 }
 
 func getGameMaps(gameStrings []string) map[int][]int {
@@ -52,9 +62,7 @@ func getGameMaps(gameStrings []string) map[int][]int {
 		id, _ := strconv.Atoi(strings.Split(splitLine[0], " ")[1])
 		sets := strings.Split(splitLine[1], ";")
 
-		blueCount := getColourCount("blue", sets)
-		redCount := getColourCount("red", sets)
-		greenCount := getColourCount("green", sets)
+		blueCount, redCount, greenCount := getColourCount(sets)
 
 		gameValues := []int{blueCount, redCount, greenCount}
 
@@ -69,12 +77,10 @@ func getGamesPossible(games map[int][]int) []int {
 	var possibleIds []int
 
 	for id, values := range games {
-		fmt.Printf("ID: %d, Values: %v\n", id, values)
 		if values[0] <= MaxBlue &&
 			values[1] <= MaxRed &&
 			values[2] <= MaxGreen {
 			possibleIds = append(possibleIds, id)
-			fmt.Println(id)
 		}
 	}
 
